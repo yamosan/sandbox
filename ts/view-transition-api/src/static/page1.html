@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <title>page1</title>
+  </head>
+  <body>
+    <h1>page1</h1>
+    <a href="/page2" data-to="page2">page2へ</a>
+  </body>
+
+  <style>
+    a {
+      color: black;
+    }
+    body {
+      height: 100vh;
+      background-color: skyblue;
+    }
+
+    @keyframes slide-to-right {
+      from {
+        left: 0%;
+      }
+      to {
+        left: 100%;
+      }
+    }
+
+    @keyframes slide-from-left {
+      from {
+        left: -100%;
+      }
+      to {
+        left: 0%;
+      }
+    }
+
+    ::view-transition-old(root) {
+      animation-name: slide-to-right;
+    }
+
+    ::view-transition-new(root) {
+      animation-name: slide-from-left;
+    }
+  </style>
+
+  <script>
+    document.startViewTransition(() => {
+      document.querySelectorAll("a[data-to]").forEach((elm) => {
+        elm.addEventListener("click", (e) => {});
+      });
+    });
+  </script>
+</html>
