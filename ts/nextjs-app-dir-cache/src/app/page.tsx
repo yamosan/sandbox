@@ -4,7 +4,11 @@ async function getNow() {
     datetime: string;
   };
 
-  await new Promise((res) => setTimeout(res, 800));
+  console.log("---------------------");
+  console.log(data.datetime);
+  console.log();
+
+  await new Promise((res) => setTimeout(res, 2000));
   return data;
 }
 
