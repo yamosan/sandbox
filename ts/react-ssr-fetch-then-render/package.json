@@ -1,0 +1,27 @@
+{
+  "scripts": {
+    "dev": "run-p -c dev:*",
+    "dev:fe": "esbuild ./src/entry.client.tsx --bundle --outfile=./build/index.js --watch",
+    "dev:be": "ts-node ./src/entry.server.tsx",
+    "build": "run-p -c build:*",
+    "build:fe": "esbuild ./src/entry.client.tsx --outfile=./build/index.js --bundle --minify-syntax --define:process.env.NODE_ENV=\\\"production\\\"",
+    "build:be": "tsc --noEmit && esbuild ./src/entry.server.tsx --bundle --outfile=./build/entry.server.js --platform=node ",
+    "start": "node ./build/entry.server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^2.0.1",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.2.5",
+    "@types/react": "^18.2.8",
+    "@types/react-dom": "^18.2.4",
+    "esbuild": "^0.17.19",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
