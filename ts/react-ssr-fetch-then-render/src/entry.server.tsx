@@ -2,7 +2,7 @@ import express from "express";
 import ReactDOMServer from "react-dom/server";
 import { App } from "./App";
 import path from "path";
-import { LOADER_DATA_HANDOFF_KEY, LoaderDataProvider } from "./LoaderContext";
+import { LoaderDataProvider } from "./LoaderDataProvider";
 import { fetchUser } from "./api/user";
 
 const app = express();
@@ -21,9 +21,6 @@ app.get("/", async (req, res) => {
   const html = `
         <html lang="en">
         <head>
-            <script>
-              window.${LOADER_DATA_HANDOFF_KEY}=JSON.parse('${JSON.stringify(data)}')
-            </script>
             <script src="index.js" async defer></script>
         </head>
         <body>

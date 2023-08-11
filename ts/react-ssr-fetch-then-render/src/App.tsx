@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "./LoaderContext";
+import { useLoaderData } from "./LoaderDataProvider";
 import { User } from "./api/user";
 
 export const App = () => {

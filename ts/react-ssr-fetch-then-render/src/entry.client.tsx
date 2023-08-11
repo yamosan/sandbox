@@ -1,6 +1,6 @@
 import { hydrateRoot } from "react-dom/client";
 import { App } from "./App";
-import { LoaderDataProvider } from "./LoaderContext";
+import { LoaderDataProvider } from "./LoaderDataProvider";
 
 const container = document.getElementById("root")!;
 hydrateRoot(
