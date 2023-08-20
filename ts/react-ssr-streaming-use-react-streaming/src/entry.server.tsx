@@ -2,6 +2,7 @@ import express from "express";
 import { App } from "./App";
 import path from "path";
 import { renderToStream } from "react-streaming/server";
+import { renderToPipeableStream } from "react-dom/server";
 
 const app = express();
 const PORT = 3000;
@@ -9,22 +10,16 @@ const PORT = 3000;
 app.use(express.static(path.resolve(__dirname, "../build")));
 
 app.get("/", async (req, res) => {
-  const { pipe } = await renderToStream(<App />, { disable: false });
+  const { pipe } = await renderToStream(<App />, {
+    disable: false,
+    renderToPipeableStream: (children, options) =>
+      renderToPipeableStream(children, {
+        ...options,
+        bootstrapScripts: ["/index.js"],
+      }),
+  });
 
   pipe?.(res);
-
-  // const { pipe } = renderToPipeableStream(
-  //   <DataProvider data={createServerData()}>
-  //     <AppServer />
-  //   </DataProvider>,
-  //   {
-  //     bootstrapScripts: ["/index.js"],
-  //     onShellReady() {
-  //       res.write("<html><body>");
-  //       pipe(stream);
-  //     },
-  //   }
-  // );
 });
 
 app.listen(PORT, () => {
